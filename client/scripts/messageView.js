@@ -7,3 +7,5 @@ var MessageView = {
       </div>
     `)
 };
+
+module.exports = MessageView;

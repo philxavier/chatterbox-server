@@ -21,3 +21,5 @@ var RoomsView = {
     }
   }
 };
+
+module.exports = RoomsView;

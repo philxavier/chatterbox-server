@@ -24,9 +24,9 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
-    // setInterval(()=>{
-    //   App.fetch();
-    // }, 12000);
+    setInterval(()=>{
+      App.fetch();
+    }, 12000);
     //can use setInterval and polling to re-render updates
   },
 
@@ -85,3 +85,5 @@ var App = {
     FormView.setStatus(false);
   }
 };
+
+module.exports = App;//

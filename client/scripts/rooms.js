@@ -5,3 +5,5 @@ var Rooms = {
     RoomsView.renderRoom(room);
   }
 };
+
+module.exports = Rooms;

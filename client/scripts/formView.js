@@ -33,3 +33,5 @@ var FormView = {
   }
 
 };
+
+module.exports = FormView; 

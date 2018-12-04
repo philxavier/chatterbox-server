@@ -14,3 +14,5 @@ var MessagesView = {
     console.log(Friends.friendList);
   }
 };
+
+module.exports = MessagesView;

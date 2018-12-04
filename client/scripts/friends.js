@@ -26,3 +26,4 @@ var Friends = {
   }
 };
 
+module.exports = Friends;
