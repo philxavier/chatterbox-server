@@ -12,28 +12,55 @@ this file and include it in basic-server.js so that it actually works.
 
 **************************************************************/
 //var url = require('url');
-var defaultCorsHeaders = {
-  'access-control-allow-origin': '*',
-  'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'access-control-allow-headers': 'content-type, accept',
-  'access-control-max-age': 10 // Seconds.
-};
 
+// var defaultCorsHeaders = {
+//   'access-control-allow-origin': '*',
+//   'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS',
+//   'access-control-allow-headers': 'content-type, accept',
+//   'access-control-max-age': 10 // Seconds.
+// };
+//var fs = require('fs');
 
+var storage = {};
+storage.results = [];
 
 var requestHandler = function(request, response) {
-
+  
   const { method, url } = request;
+  let returnData;
+  //const {headers} = request;
+  //var statusCode = 200;
 
-  if (url === 'classes/messages') {
-    console.log('headers object:', request.headers);
+  if (url === '/classes/messages') {
+    if (method === 'GET') {
+      statusCode = 200;
+      returnData = storage;
+    }    
+  
+    var stringMessage = ''; 
+  
+    if (method === 'POST') {
+      statusCode = 201;
+      request.on('data', function(chunk) {
+        stringMessage += chunk;
+      });
+      
+
+      request.on('end', () => {
+        stringMessage = JSON.parse(stringMessage);
+        returnData = stringMessage;
+        // console.log('STRINGMESSAGE HERE', stringMessage.username);
+        storage.results.push(stringMessage);
+        
+        //console.log('storage results', storage.results[1]);
+      });
+    }
+  } else {
+    statusCode = 404;
   }
 
   
-  // console.log(method);
-  //;console.log('this is the headers obj:', headers);
-  // console.log('this is the request obj:', request);
-  // console.log('this is the response obj:', response);
+
   // Request and Response come from node's http module.
   //
   // They include information about both the incoming request, such as
@@ -51,7 +78,7 @@ var requestHandler = function(request, response) {
   console.log('Serving request type ' + request.method + ' for url ' + request.url);
   
   // The outgoing status.
-  var statusCode = 200;
+  
 
   // See the note below about CORS headers.
   let headers = defaultCorsHeaders;
@@ -73,7 +100,8 @@ var requestHandler = function(request, response) {
   //
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
-  response.end('Hello, World!');
+  
+  response.end(JSON.stringify(returnData));
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).
