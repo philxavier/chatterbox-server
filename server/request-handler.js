@@ -28,8 +28,6 @@ var requestHandler = function(request, response) {
   
   const { method, url } = request;
   let returnData;
-  //const {headers} = request;
-  //var statusCode = 200;
 
   if (url === '/classes/messages') {
     if (method === 'GET') {
@@ -40,7 +38,9 @@ var requestHandler = function(request, response) {
     var stringMessage = ''; 
   
     if (method === 'POST') {
+      
       statusCode = 201;
+
       request.on('data', function(chunk) {
         stringMessage += chunk;
       });
@@ -49,10 +49,8 @@ var requestHandler = function(request, response) {
       request.on('end', () => {
         stringMessage = JSON.parse(stringMessage);
         returnData = stringMessage;
-        // console.log('STRINGMESSAGE HERE', stringMessage.username);
         storage.results.push(stringMessage);
         
-        //console.log('storage results', storage.results[1]);
       });
     }
   } else {
