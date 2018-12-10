@@ -15,4 +15,4 @@ var MessagesView = {
   }
 };
 
-module.exports = MessagesView;
+//module.exports = MessagesView;

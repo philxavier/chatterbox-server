@@ -4,4 +4,4 @@ var Messages = {
   roomname: 'roomname'
 };
 
-module.exports = Messages;
+//module.exports = Messages;

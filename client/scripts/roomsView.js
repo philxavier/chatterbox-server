@@ -22,4 +22,4 @@ var RoomsView = {
   }
 };
 
-module.exports = RoomsView;
+//module.exports = RoomsView;

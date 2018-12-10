@@ -6,4 +6,4 @@ var Rooms = {
   }
 };
 
-module.exports = Rooms;
+//module.exports = Rooms;
